@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Schematic sketchpad</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Top bar -->
+  <header>
+    <h1>Schematic sketchpad</h1>
+    <div class="act">
+      <button id="undo">Undo</button>
+      <button id="clear">Clear</button>
+      <button id="export" class="pri">Export SVG</button>
+    </div>
+  </header>
+
+  <!-- Tool rail (filled in by tools.js) + drawing canvas -->
+  <main>
+    <nav id="rail" aria-label="Tools"></nav>
+    <div id="wrap"><svg id="canvas" role="img" aria-label="Drawing canvas"></svg></div>
+  </main>
+
+  <!-- Bottom bar: hint text + value box for the selected part -->
+  <footer>
+    <span id="hint"></span>
+    <label id="valueLabel" hidden>Value <input id="valueInput" autocomplete="off"></label>
+  </footer>
+
+  <!-- Export pop-up -->
+  <dialog id="dialog">
+    <div>Your drawing as SVG</div>
+    <textarea id="svgText" readonly rows="8"></textarea>
+    <div class="act">
+      <button id="copySvg">Copy SVG</button>
+      <button id="downloadSvg">Download .svg</button>
+      <button id="closeDialog">Close</button>
+    </div>
+  </dialog>
+
+  <!-- Scripts: ORDER MATTERS (each file uses things defined in the ones above it) -->
+  <script src="js/config.js"></script>   <!-- settings + parts library -->
+  <script src="js/state.js"></script>    <!-- data, undo, saving -->
+  <script src="js/render.js"></script>   <!-- turns data into pictures -->
+  <script src="js/tools.js"></script>    <!-- mouse, keyboard, toolbar -->
+  <script src="js/export.js"></script>   <!-- SVG export -->
+  <script src="js/main.js"></script>     <!-- connects buttons, starts the app -->
+</body>
+</html>
